@@ -232,6 +232,32 @@ def test_period_subtract_overlapping_3():
     assert expected_period in subtracted
 
 
+def test_period_subtract_contains():
+    start1 = datetime.fromisoformat('2020-10-01T10:00:00')
+    end1 = datetime.fromisoformat('2020-10-01T18:00:00')
+    period1 = Period(start1, end1)
+
+    start2 = datetime.fromisoformat('2020-10-01T14:00:00')
+    end2 = datetime.fromisoformat('2020-10-01T15:00:00')
+    period2 = Period(start2, end2)
+
+    subtracted = period1 - period2
+
+    expected_start1 = datetime.fromisoformat('2020-10-01T10:00:00')
+    expected_end1 = datetime.fromisoformat('2020-10-01T14:00:00')
+
+    expected_period = Period(expected_start1, expected_end1)
+
+    expected_start2 = datetime.fromisoformat('2020-10-01T15:00:00')
+    expected_end2 = datetime.fromisoformat('2020-10-01T18:00:00')
+
+    expected_period_2 = Period(expected_start2, expected_end2)
+
+    assert len(subtracted) == 2
+    assert expected_period in subtracted
+    assert expected_period_2 in subtracted
+
+
 def test_period_contains():
     start1 = datetime.fromisoformat('2000-10-01T10:00:00')
     end1 = datetime.fromisoformat('2000-10-01T18:00:00')
