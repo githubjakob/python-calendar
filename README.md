@@ -6,6 +6,15 @@ Choosing from a list of available time slots.
 
 ## Setup
 
+Install venv
+
+```
+python3 -m pip install --user virtualenv
+
+py -m pip install --user virtualenv
+
+```
+
 Create venv
 
 ```
