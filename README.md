@@ -19,6 +19,8 @@ Create venv
 
 ```
 python3 -m venv .venv
+
+py -m venv env
 ```
 
 Activate venv
@@ -45,4 +47,7 @@ deactivate
 
 ```
 python -m pytest
+
+show console log
+python -m pytest -s
 ```
