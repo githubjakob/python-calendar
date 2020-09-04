@@ -8,3 +8,12 @@ def test_calendar():
     calendar = Calendar()
 
     calendar.add_appointment(appointment)
+
+
+def test_calendar_get_free_periods():
+
+    calendar = Calendar()
+
+    free_periods = calendar.get_free_periods()
+
+    assert len(free_periods) == 1
