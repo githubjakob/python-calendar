@@ -168,7 +168,8 @@ def test_period_subtract_not_overlapping():
 
     subtracted = period1 - period2
 
-    assert len(subtracted) == 2
+    assert len(subtracted) == 1
+    assert period1 in subtracted
 
 
 def test_period_subtract_overlapping_1():
@@ -295,3 +296,92 @@ def test_period_subtract_contained():
     assert len(subtracted) == 2
     assert expected_first in subtracted
     assert expected_second in subtracted
+
+
+def test_period_subtract_contained_2():
+    start1 = datetime.fromisoformat('2020-10-01T14:00:00')
+    end1 = datetime.fromisoformat('2020-10-01T15:00:00')
+    period1 = Period(start1, end1)
+
+    start2 = datetime.fromisoformat('2020-10-01T10:00:00')
+    end2 = datetime.fromisoformat('2020-10-01T18:00:00')
+    period2 = Period(start2, end2)
+
+    subtracted = period1 - period2
+
+    assert len(subtracted) == 0
+
+
+def test_subtract():
+    period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T14:00:00')
+
+    subtracted = period.subtract([])
+
+    assert len(subtracted) == 1
+    assert period in subtracted
+
+
+def test_subtract_2():
+    period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T18:00:00')
+
+    subtract = Period.fromIsoFormat(
+        '2000-10-01T14:00:00', '2000-10-01T15:00:00')
+
+    subtracted = period.subtract([subtract])
+
+    expected_1 = Period.fromIsoFormat(
+        '2000-10-01T10:00:00', '2000-10-01T14:00:00')
+    expected_2 = Period.fromIsoFormat(
+        '2000-10-01T15:00:00', '2000-10-01T18:00:00')
+
+    assert len(subtracted) == 2
+    assert expected_1 in subtracted
+    assert expected_2 in subtracted
+
+
+def test_subtract_2():
+    period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T22:00:00')
+
+    subtract_1 = Period.fromIsoFormat(
+        '2000-10-01T14:00:00', '2000-10-01T15:00:00')
+
+    subtract_2 = Period.fromIsoFormat(
+        '2000-10-01T17:00:00', '2000-10-01T18:00:00')
+
+    subtracted = period.subtract([subtract_1, subtract_2])
+
+    expected_1 = Period.fromIsoFormat(
+        '2000-10-01T10:00:00', '2000-10-01T14:00:00')
+    expected_2 = Period.fromIsoFormat(
+        '2000-10-01T15:00:00', '2000-10-01T17:00:00')
+    expected_3 = Period.fromIsoFormat(
+        '2000-10-01T18:00:00', '2000-10-01T22:00:00')
+
+    assert len(subtracted) == 3
+    assert expected_1 in subtracted
+    assert expected_2 in subtracted
+    assert expected_3 in subtracted
+
+
+def test_subtract_3():
+    period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T22:00:00')
+
+    subtract_1 = Period.fromIsoFormat(
+        '2000-10-01T14:00:00', '2000-10-01T15:00:00')
+
+    subtract_2 = Period.fromIsoFormat(
+        '2000-10-01T17:00:00', '2000-10-01T18:00:00')
+
+    subtract_3 = Period.fromIsoFormat(
+        '2000-10-01T15:00:00', '2000-10-01T19:00:00')
+
+    subtracted = period.subtract([subtract_1, subtract_2, subtract_3])
+
+    expected_1 = Period.fromIsoFormat(
+        '2000-10-01T10:00:00', '2000-10-01T14:00:00')
+    expected_2 = Period.fromIsoFormat(
+        '2000-10-01T19:00:00', '2000-10-01T22:00:00')
+
+    assert len(subtracted) == 2
+    assert expected_1 in subtracted
+    assert expected_2 in subtracted
