@@ -16,6 +16,12 @@ class Period:
         else:
             return False
 
+    def contains(self, other: 'Period'):
+        if not self.is_overlapped(other):
+            return False
+        else:
+            return self.start <= other.start and self.end >= other.end
+
     def get_overlapped_period(self, other: 'Period') -> 'Period':
         if not self.is_overlapped(other):
             return
@@ -42,6 +48,19 @@ class Period:
 
     def __radd__(self, other):
         return self.__add__(other)
+
+    def __sub__(self, other):
+        if self.contains(other):
+            first = Period(self.start, other.start)
+            second = Period(other.end, self.end)
+            return [first, second]
+        elif self.is_overlapped(other):
+            if self.start < other.start:
+                return [Period(self.start, min(self.end, other.start))]
+            else:
+                return [Period(max(self.start, other.end), self.end)]
+        else:
+            return [self, other]
 
     def __repr__(self):
         return 'Period[{0} - {1}]'.format(self.start, self.end)
