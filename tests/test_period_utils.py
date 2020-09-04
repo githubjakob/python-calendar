@@ -21,6 +21,107 @@ def test_merge_2():
     assert period1 in merged
 
 
+def test_merge_3():
+    period1 = Period.fromIsoFormat(
+        '2020-10-01T10:00:00', '2020-10-01T14:00:00')
+
+    period2 = Period.fromIsoFormat(
+        '2020-10-01T13:00:00', '2020-10-01T18:00:00')
+
+    merged = merge([period2, period1])
+
+    expected_period = Period.fromIsoFormat(
+        '2020-10-01T10:00:00', '2020-10-01T18:00:00')
+
+    assert len(merged) == 1
+    assert expected_period in merged
+
+
+def test_merge_4():
+    period1 = Period.fromIsoFormat(
+        '2020-10-01T10:00:00', '2020-10-01T14:00:00')
+
+    period2 = Period.fromIsoFormat(
+        '2020-10-01T13:00:00', '2020-10-01T18:00:00')
+
+    period3 = Period.fromIsoFormat(
+        '2020-10-01T20:00:00', '2020-10-01T21:00:00')
+
+    merged = merge([period2, period3, period1])
+
+    expected_1 = Period.fromIsoFormat(
+        '2020-10-01T10:00:00', '2020-10-01T18:00:00')
+    expected_2 = Period.fromIsoFormat(
+        '2020-10-01T20:00:00', '2020-10-01T21:00:00')
+
+    assert len(merged) == 2
+    assert expected_1 in merged
+    assert expected_2 in merged
+
+
+def test_merge_4():
+    period1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T12:00:00')
+
+    period2 = Period.fromIsoFormat(
+        '2020-10-01T14:00:00', '2020-10-01T15:00:00')
+
+    period3 = Period.fromIsoFormat(
+        '2020-10-01T12:00:00', '2020-10-01T18:00:00')
+
+    merged = merge([period2, period3, period1])
+
+    expected_1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T18:00:00')
+
+    assert len(merged) == 1
+    assert expected_1 in merged
+
+
+def test_merge_5():
+    period1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T12:00:00')
+
+    period2 = Period.fromIsoFormat(
+        '2020-10-01T14:00:00', '2020-10-01T15:00:00')
+
+    period3 = Period.fromIsoFormat(
+        '2020-10-01T12:00:00', '2020-10-01T18:00:00')
+
+    period4 = Period.fromIsoFormat(
+        '2100-10-01T12:00:00', '2100-10-01T18:00:00')
+
+    merged = merge([period2, period4, period3, period1])
+
+    expected_1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T18:00:00')
+    expected_2 = Period.fromIsoFormat(
+        '2100-10-01T12:00:00', '2100-10-01T18:00:00')
+
+    assert len(merged) == 2
+    assert expected_1 in merged
+    assert expected_2 in merged
+
+
+def test_merge_6():
+    period1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T12:00:00')
+
+    period2 = Period.fromIsoFormat(
+        '2020-10-01T11:00:00', '2020-10-01T15:00:00')
+
+    period3 = Period.fromIsoFormat(
+        '2020-10-01T13:00:00', '2020-10-01T18:00:00')
+
+    merged = merge([period2, period3, period1])
+
+    expected_1 = Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T18:00:00')
+
+    assert len(merged) == 1
+    assert expected_1 in merged
+
+
 def test_sort_1():
     sorted_periods = sort_by_start([])
 

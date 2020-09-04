@@ -7,6 +7,12 @@ class Period:
         self.start = start
         self.end = end
 
+    @classmethod
+    def fromIsoFormat(cls, start: str, end: str):
+        start_datetime = datetime.fromisoformat(start)
+        end_datetime = datetime.fromisoformat(end)
+        return Period(start_datetime, end_datetime)
+
     def get_duration(self) -> timedelta:
         return self.end - self.start
 
