@@ -13,12 +13,9 @@ class Calendar:
         self.appointments.append(appointment)
 
     def get_free_periods(self):
-        if len(self.appointments) == 0:
-            return [Period(self.opening_time, self.closing_time)]
+        total_time = Period(self.opening_time, self.closing_time)
 
-        if len(self.appointments) == 1:
+        all_blocked_periods = list(
+            map(lambda a: a.get_period(), self.appointments))
 
-            period1 = Period(self.opening_time, self.closing_time)
-            period2 = self.appointments[0].get_period()
-
-            return period1 - period2
+        return total_time.subtract(all_blocked_periods)
