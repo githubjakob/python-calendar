@@ -8,3 +8,5 @@ def test_appointment():
     period = appointment.get_period()
 
     assert period is not None
+    assert period == Period.fromIsoFormat(
+        '2020-10-01T08:00:00', '2020-10-01T12:00:00')
