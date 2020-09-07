@@ -45,7 +45,7 @@ P(1,6) - [P(4,5), P(5,6)] = [P(1,4)]
 Other operations include
 - checking if Periods `overlap`
 - checking if a Period is `contained` in another Period
-- `merging` Periods if they overlap, e.g. `merge(P(1,2),(P(2,3)) = P(1,3)`
+- `merging` Periods if they overlap, e.g. `merge(P(1,2),P(2,3)) = P(1,3)`
 
 ## Setup
 
