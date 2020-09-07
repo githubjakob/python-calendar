@@ -28,13 +28,19 @@ It works on the concept of a `Period` (which is defined by a start and end times
 For simplictiy let's denote a `Period` from 2pm to 3pm by `P(2,3)`. 
 
 You can `subtract` a Period A from a Period B which results in the time that is included in B but not in A, e.g.
-`P(1,6) - P(2,3) = [P(1,2), P(3,6)]`
+``` 
+P(1,6) - P(2,3) = [P(1,2), P(3,6)]
+``` 
 
 You can also `add` a Period A to a Period B which results in the time which that is included in both Periods, e.g.
-`P(1,2) - P(2,3) = [P(1,3)]`
+``` 
+P(1,2) - P(2,3) = [P(1,3)]
+``` 
 
 Building upon these operations, we can also build higher order operations, like subtracting a list of Periods A1.. from a PeriodB, e.g.
-`P(1,6) - [P(4,5), P(5,6)] = [P(1,4)]`
+```
+P(1,6) - [P(4,5), P(5,6)] = [P(1,4)]
+``` 
 
 
 ## Setup
