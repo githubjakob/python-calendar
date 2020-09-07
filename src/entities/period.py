@@ -82,7 +82,7 @@ class Period:
         else:
             return self.start <= other.start and self.end >= other.end
 
-    def get_overlapped_period(self, other: 'Period') -> 'Period':
+    def get_overlapped_period(self, other: 'Period'):
         if not self.is_overlapped(other):
             return
 
@@ -124,7 +124,7 @@ class Period:
         else:
             return [self]
 
-    def subtract(self, others: list):
+    def subtract(self, others):
         if len(others) == 0:
             return [self]
 
@@ -146,5 +146,5 @@ class Period:
         return results
 
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other):
         return self.start == other.start and self.end == other.end
