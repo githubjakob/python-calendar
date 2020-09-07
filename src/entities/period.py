@@ -145,8 +145,6 @@ class Period:
 
         return results
 
-    def __repr__(self):
-        return 'Period[{0} - {1}]'.format(self.start, self.end)
 
     def __eq__(self, other) -> bool:
         return self.start == other.start and self.end == other.end
