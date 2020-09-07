@@ -106,11 +106,11 @@ def test_calendar_get_free_periods_for_date():
 def test_calendar_get_free_periods_for_date_2():
     calendar = Calendar()
 
+    calendar.set_opening_times('THURSDAY', '08:00:00', '18:00:00')
+
     appointment1 = Appointment(
         start='2020-10-01T10:00:00', end='2020-10-01T12:00:00')
     calendar.add_appointment(appointment1)
-
-    calendar.set_opening_times('THURSDAY', '08:00:00', '18:00:00')
 
     target_date = date.fromisoformat('2020-10-01')
 
