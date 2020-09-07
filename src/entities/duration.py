@@ -2,7 +2,7 @@ from datetime import time
 
 
 class Duration:
-    def __init__(self, start: str, end: str):
+    def __init__(self, start, end):
         self.start = time.fromisoformat(start)
         self.end = time.fromisoformat(end)
 

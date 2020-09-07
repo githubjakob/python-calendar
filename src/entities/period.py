@@ -14,7 +14,7 @@ def sort_by_start(list_of_periods):
     return list_of_periods
 
 
-def merge(list_of_periods) -> list:
+def merge(list_of_periods):
     """
     Adds up all the periods from the input list that are overlapping
     Examples:
@@ -27,11 +27,8 @@ def merge(list_of_periods) -> list:
     if len(list_of_periods) == 0:
         return []
 
-    if len(list_of_periods) == 1:
+    if len(list_of_periods) <= 2:
         return list_of_periods
-
-    if len(list_of_periods) == 2:
-        return list_of_periods[0] + list_of_periods[1]
 
     sorted_periods = sort_by_start(list_of_periods)
 
@@ -40,7 +37,7 @@ def merge(list_of_periods) -> list:
 
     for i in range(1, len(sorted_periods)):
 
-        current: Period = sorted_periods[i]
+        current = sorted_periods[i]
 
         if temp.is_overlapped(current):
             temp = temp + current
@@ -56,26 +53,30 @@ def merge(list_of_periods) -> list:
 
 
 class Period:
-    def __init__(self, start: datetime, end: datetime):
+    def __init__(self, start, end):
         self.start = start
         self.end = end
 
+    def __repr__(self):
+        return f"Period('{self.start}', '{self.end}')"
+
+
     @classmethod
-    def fromIsoFormat(cls, start: str, end: str):
+    def fromIsoFormat(cls, start, end):
         start_datetime = datetime.fromisoformat(start)
         end_datetime = datetime.fromisoformat(end)
         return Period(start_datetime, end_datetime)
 
-    def get_duration(self) -> timedelta:
+    def get_duration(self):
         return self.end - self.start
 
-    def is_overlapped(self, other: 'Period') -> bool:
+    def is_overlapped(self, other):
         if max(self.start, other.start) <= min(self.end, other.end):
             return True
         else:
             return False
 
-    def contains(self, other: 'Period'):
+    def contains(self, other):
         if not self.is_overlapped(other):
             return False
         else:

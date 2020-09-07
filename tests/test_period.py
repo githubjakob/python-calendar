@@ -1,4 +1,3 @@
-from src.main import func
 from src.entities.period import Period
 from datetime import datetime, timedelta
 import time
@@ -8,6 +7,7 @@ def test_period():
     start = datetime.fromisoformat('2020-10-01T12:00:00')
     end = datetime.fromisoformat('2020-10-01T13:00:00')
     period = Period(start, end)
+    assert period.start == datetime(2020, 10, 1, 12, 0) and period.end == datetime(2020, 10, 1, 13, 0) 
 
 
 def test_period_get_duration():
@@ -71,7 +71,7 @@ def test_period_is_overlapping_4():
     assert is_overlapping == True
 
 
-def test_period_is_overlapping_4():
+def test_period_is_overlapping_5():
     start1 = datetime.fromisoformat('2020-10-01T12:00:00')
     end1 = datetime.fromisoformat('2020-10-01T15:00:00')
     period1 = Period(start1, end1)
@@ -365,7 +365,7 @@ def test_subtract_2():
     assert expected_2 in subtracted
 
 
-def test_subtract_2():
+def test_subtract_3():
     period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T22:00:00')
 
     subtract_1 = Period.fromIsoFormat(
@@ -389,7 +389,7 @@ def test_subtract_2():
     assert expected_3 in subtracted
 
 
-def test_subtract_3():
+def test_subtract_4():
     period = Period.fromIsoFormat('2000-10-01T10:00:00', '2000-10-01T22:00:00')
 
     subtract_1 = Period.fromIsoFormat(
